@@ -1,0 +1,8 @@
+runtime: nodejs10
+env: standard
+service: api
+automatic_scaling:
+  min_instances: 0
+  max_instances: 5
+env_variables:
+  APP_NAME: "TextversationApi"
