@@ -2,7 +2,7 @@ const {db} = require("../database");
 
 class InterestModel{
 
-    static getAllInterests(){
+    getAllInterests(){
         let interestsRef = db.collection("interests");
 
         return interestsRef.get();
@@ -10,4 +10,4 @@ class InterestModel{
 }
 
 
-module.exports = InterestModel;
+module.exports = new InterestModel();
