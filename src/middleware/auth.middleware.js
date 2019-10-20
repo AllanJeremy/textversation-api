@@ -21,6 +21,6 @@ module.exports.logout = (req,res,next)=>{
         res.status(200).json(responseData);
         next();
     }).catch((err)=>{
-        res.status(500).json(responseData);
+        res.status(500).json(Api.getError(err.message,err));
     });
 };
