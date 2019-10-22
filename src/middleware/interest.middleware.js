@@ -3,12 +3,11 @@ const Interest = require("../modules/interest");
 
 let _getInterestData = (interestDocs)=>{
     return interestDocs.map((doc)=>{
-        let docData = {};
-        docData[doc.id] =  doc.data();
-        return docData;
+        return doc.data();
     });
 };
 
+// Get all the interests
 module.exports.getAllInterests = (req,res,next)=>{
     Interest.getAllInterests().then((response)=>{ // response : QuerySnaspshot
         let isOk = !response.empty;
@@ -21,6 +20,23 @@ module.exports.getAllInterests = (req,res,next)=>{
         res.status(responseData.statusCode).json(responseData);
         next();
     }).catch((err)=>{
+        console.error("Something went wrong while trying to get all interests");
+        console.error(err.message);
+        
+        let responseData = Api.getError(err.message,err);
+        res.status(500).json(responseData);
+    });
+};
+
+// Insert interests
+module.exports.addInterests = (req,res,next)=>{
+    Interest.addInterests(req.params.categoryId,req.body.data)
+    .then((response)=>{   
+        let responseData = Api.getResponse(true,"Successfully added responses",null,201);
+        res.status(responseData.statusCode).json(responseData);
+        next();
+    })
+    .catch((err)=>{
         console.error("Something went wrong while trying to get all interests");
         console.error(err.message);
         

@@ -1,9 +1,12 @@
 const InterestModel = require("../models/interest.model");
 
 class Interest{
-    static async getAllInterests(){
-        let test = InterestModel.getAllInterests();
-        return test;
+    static getAllInterests(){
+        return InterestModel.getAllInterests();
+    }
+
+    static addInterests(categoryId,interests){
+        return InterestModel.addInterests(categoryId,interests);
     }
 }
 

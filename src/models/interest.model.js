@@ -2,10 +2,33 @@ const {db} = require("../database");
 
 class InterestModel{
 
-    getAllInterests(){
-        let interestsRef = db.collection("interests");
+    constructor(){
+        this.interestsRef = db.collection("interests");
+    }
+    
+    addInterests(categoryId,data){
+        if(!data.interests.length) return;
 
-        return interestsRef.get();
+        let interests = data.interests.map((singleInterest,index)=>{
+            if(!singleInterest) return;
+
+            //? Generate an id based on the category id
+            singleInterest.id = `${categoryId}_${index}`;
+
+            return singleInterest;
+        });
+
+        let insertData = {
+            "interests": interests
+        };
+
+        return this.interestsRef.doc(categoryId).set(insertData,{
+            merge:true
+        });
+    }
+
+    getAllInterests(){
+        return this.interestsRef.get();
     }
 }
 
