@@ -56,9 +56,29 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
+    // Get user interests
+    async getUserInterests(userId){
+        let user = await this.getUser(userId);
+        let userData = user.data();
+
+        return user.exists ? userData.interests : {};
+    }
+
+    //* HELPER FUNCTIONS
+    // Convert interests array to object
+    _getInterestsObject(interests){ //? [Reason] Makes it easier for us to delete interests when they are objects in firebase
+        let interestObject = {};
+        interests.map((interest)=>{
+            interestObject[interest.id] = interest;
+        });
+
+        return interestObject;
+    }
+
     // Adds an object containing interests
     async setInterests(userId,interests){
         let updateData = {
+            interests: this._getInterestsObject(interests)
         };
 
         // updateData[interest.key] = { interestName: , interestType: , interestDescription: ,}
@@ -66,12 +86,9 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
-    async removeInterest(interestId){
-        //TODO: Add implementation
-        let updateData = {
-        };
-
-        return this.updateUser(userId,updateData);
+    // 
+    async removeInterest(userId,interestId){ //? Depends on user model directly
+        return UserModel.removeInterest(userId,interestId);
     }
 }
 

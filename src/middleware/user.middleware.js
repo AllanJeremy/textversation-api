@@ -98,14 +98,11 @@ module.exports.setGenderPreference = (req,res,next)=>{
 
 // Add interests
 module.exports.addInterests = (req,res,next)=>{
-    User.addInterests(req.body.uid,req.body.interests)
+    User.setInterests(req.body.uid,req.body.interests)
     .then((response)=>{
-        //TODO: Add implementation
-        let responseData = {
+        let responseData = Api.getResponse(true,"Successfully added interests",req.body.interests,201);
 
-        };
-
-        res.status(201).json(responseData);
+        res.status(responseData.statusCode).json(responseData);
         next();
     })
     .catch((err)=>{
@@ -117,14 +114,11 @@ module.exports.addInterests = (req,res,next)=>{
 
 // Remove an interest
 module.exports.removeInterest = (req,res,next)=>{
-    User.removeInterest(req.params.interestId)
+    User.removeInterest(req.body.uid,req.params.interestId)
     .then((response)=>{
-        //TODO: Add implementation
-        let responseData = {
+        let responseData = Api.getResponse(true,"Successfully removed interest",response,201);
 
-        };
-
-        res.status(201).json(responseData);
+        res.status(responseData.statusCode).json(responseData);
         next();
     })
     .catch((err)=>{

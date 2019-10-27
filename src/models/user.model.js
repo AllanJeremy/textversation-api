@@ -1,4 +1,4 @@
-const {db} = require("../database");
+const {db,firestore} = require("../database");
 
 class UserModel{
     // Get user
@@ -14,6 +14,16 @@ class UserModel{
     // Delete user
     deleteUser(uid){
         return db.collection("users").doc(uid).delete();
+    }
+
+    removeInterest(uid,interestId){//? Leech ~ depends on update user
+        let updateData = {
+            interests: {
+                [interestId]: firestore.FieldValue.delete() // Deletes the interest with the id of `interestId`
+            }
+        };
+
+        return this.updateUser(uid,updateData);
     }
 
 }
