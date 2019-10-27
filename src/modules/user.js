@@ -3,7 +3,12 @@ const UserModel = require("../models/user.model");
 class User{
 
     //* ACTUAL DETAIL IMPLEMENTATION
-    static async updateUser(userId,updateData){
+    async getUser(userId){
+        let user = await UserModel.getUser(userId);
+        return user;
+    }
+
+    async updateUser(userId,updateData){
         // If there is no user data, don't bother
         if(!userId || !updateData) return false;
 
@@ -11,7 +16,7 @@ class User{
     }
 
     //* ABSTRACTIONS
-    static async setAge(userId,newAge){
+    async setAge(userId,newAge){
         let updateData = {
             age: newAge
         };
@@ -19,7 +24,7 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
-    static async setGender(userId,newGender){
+    async setGender(userId,newGender){
         let updateData = {
             gender: newGender
         };
@@ -27,7 +32,7 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
-    static async setGenderPreference(userId,newGenderPreference){
+    async setGenderPreference(userId,newGenderPreference){
         let updateData = {
             preferences: {
                 gender: newGenderPreference
@@ -37,7 +42,7 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
-    static async setAgePreference(userId,ageRange){
+    async setAgePreference(userId,ageRange){
         // At least one must have been set to proceeed with update
         if((!ageRange.min && !ageRange.max)) return false;
 
@@ -52,7 +57,7 @@ class User{
     }
 
     // Adds an object containing interests
-    static async setInterests(userId,interests){
+    async setInterests(userId,interests){
         let updateData = {
         };
 
@@ -61,7 +66,7 @@ class User{
         return this.updateUser(userId,updateData);
     }
 
-    static async removeInterest(interestId){
+    async removeInterest(interestId){
         //TODO: Add implementation
         let updateData = {
         };
@@ -70,4 +75,4 @@ class User{
     }
 }
 
-module.exports = User;
+module.exports = new User();
