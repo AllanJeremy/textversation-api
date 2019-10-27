@@ -8,5 +8,6 @@ admin.initializeApp({
 
 module.exports = {
     admin: admin,
-    db: admin.firestore()
+    db: admin.firestore(),
+    firestore: admin.firestore
 };
