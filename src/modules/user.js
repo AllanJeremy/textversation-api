@@ -1,5 +1,5 @@
 const UserModel = require("../models/user.model");
-const chance = require("chance");
+const chance = require("chance").Chance();
 
 class User{
     getUserNickname(gender,maxLength){
