@@ -1,6 +1,20 @@
 const UserModel = require("../models/user.model");
+const chance = require("chance");
 
 class User{
+    getUserNickname(gender,maxLength){
+        maxLength = maxLength || 15;
+    
+        let nickname = chance.name({
+            "gender": gender
+        });
+    
+        if(nickname.length > maxLength){
+            _getUserNickname(gender,maxLength);
+        }else{
+            return nickname;
+        }
+    }
 
     //* ACTUAL DETAIL IMPLEMENTATION
     async getUser(userId){
