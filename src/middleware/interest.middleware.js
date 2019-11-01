@@ -9,38 +9,29 @@ let _getInterestData = (interestDocs)=>{
 
 // Get all the interests
 module.exports.getAllInterests = (req,res,next)=>{
-    Interest.getAllInterests().then((response)=>{ // response : QuerySnaspshot
-        let isOk = !response.empty;
-        let responseStatus =  isOk ? 200 : 404;
-        let message = isOk ? "Successfully retrieved all interests" : "Interests not found";
-        let data = _getInterestData(response.docs);
+    Api.attachErrorHandler(res,
+        Interest.getAllInterests().then((response)=>{ // response : QuerySnaspshot
+            let isOk = !response.empty;
+            let responseStatus =  isOk ? 200 : 404;
+            let message = isOk ? "Successfully retrieved all interests" : "Interests not found";
+            let data = _getInterestData(response.docs);
 
-        let responseData = Api.getResponse(isOk,message,data,responseStatus);
-        
-        res.status(responseData.statusCode).json(responseData);
-        next();
-    }).catch((err)=>{
-        console.error("Something went wrong while trying to get all interests");
-        console.error(err.message);
-        
-        let responseData = Api.getError(err.message,err);
-        res.status(500).json(responseData);
-    });
+            let responseData = Api.getResponse(isOk,message,data,responseStatus);
+            
+            res.status(responseData.statusCode).json(responseData);
+            next();
+        })
+    )();
 };
 
 // Insert interests
 module.exports.addInterests = (req,res,next)=>{
-    Interest.addInterests(req.params.categoryId,req.body.data)
-    .then((response)=>{   
-        let responseData = Api.getResponse(true,"Successfully added responses",null,201);
-        res.status(responseData.statusCode).json(responseData);
-        next();
-    })
-    .catch((err)=>{
-        console.error("Something went wrong while trying to get all interests");
-        console.error(err.message);
-        
-        let responseData = Api.getError(err.message,err);
-        res.status(500).json(responseData);
-    });
+    Api.attachErrorHandler(res,
+        Interest.addInterests(req.params.categoryId,req.body.data)
+        .then((response)=>{   
+            let responseData = Api.getResponse(true,"Successfully added responses",null,201);
+            res.status(responseData.statusCode).json(responseData);
+            next();
+        })
+    )();
 };

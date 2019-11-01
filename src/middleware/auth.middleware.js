@@ -14,30 +14,30 @@ function _getUserData(user){ //? `user` is the query snapshot
 module.exports.login = (req,res,next)=>{
     let uid = req.params.uid;
 
-    Auth.login(uid).then(async (response)=>{    
-        console.log(response);
-        let loggedInUser = await User.getUser(uid);
-        let userData = _getUserData(loggedInUser);
+    Api.attachErrorHandler(res,
+        Auth.login(uid).then(async (response)=>{    
+            console.log(response);
+            let loggedInUser = await User.getUser(uid);
+            let userData = _getUserData(loggedInUser);
 
-        let responseData = Api.getResponse(true,"Successfully logged in",{
-            user: userData
-        });
-    
-        res.status(200).json(responseData);
-        next();
-    }).catch((err)=>{
-        res.status(500).json(Api.getError(err.message,err));
-    });
+            let responseData = Api.getResponse(true,"Successfully logged in",{
+                user: userData
+            });
+        
+            res.status(200).json(responseData);
+            next();
+        })
+    )();
 };
 
 // Logout functionality
 module.exports.logout = (req,res,next)=>{
-    Auth.logout(req.params.uid).then((response)=>{
-        let responseData = Api.getResponse(true,"Successfully logged out");
-    
-        res.status(200).json(responseData);
-        next();
-    }).catch((err)=>{
-        res.status(500).json(Api.getError(err.message,err));
-    });
+    Api.attachErrorHandler(res,
+        Auth.logout(req.params.uid).then((response)=>{
+            let responseData = Api.getResponse(true,"Successfully logged out");
+        
+            res.status(200).json(responseData);
+            next();
+        })
+    )();
 };
