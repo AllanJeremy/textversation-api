@@ -15,7 +15,7 @@ module.exports.getError = (message, error, statusCode) => {
 };
 
 // Attaches an error handler to a function ~ returns an appropriate response
-module.exports.attachErrorHandler = (fn,res)=>{
+module.exports.attachErrorHandler = (res,fn)=>{ //? Intended to be called in middleware
     fn.catch(err=>{
         let apiResponse = this.getError(err.message,err);
         console.log(err);
