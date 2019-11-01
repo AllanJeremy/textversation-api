@@ -13,3 +13,14 @@ module.exports.getError = (message, error, statusCode) => {
     response.error = error;
     return response;
 };
+
+// Attaches an error handler to a function ~ returns an appropriate response
+module.exports.attachErrorHandler = (fn,res)=>{
+    fn.catch(err=>{
+        let apiResponse = this.getError(err.message,err);
+        console.log(err);
+        console.error(err.message);
+
+        res.status(500).json(apiResponse);
+    });
+};
