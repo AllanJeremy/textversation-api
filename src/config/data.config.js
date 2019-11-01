@@ -1,0 +1,1 @@
+module.exports.MAX_PROSPECTS = 10000;
