@@ -14,7 +14,7 @@ module.exports.updateUser = (req,res,next)=>{
             res.status(201).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Set age
@@ -30,7 +30,7 @@ module.exports.setAge = (req,res,next)=>{
             res.status(201).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Set the gender
@@ -46,7 +46,7 @@ module.exports.setGender = (req,res,next)=>{
             res.status(201).json(responseData);
             next();
         }),
-    )();
+    );
 };
 
 // Set age preference
@@ -62,7 +62,7 @@ module.exports.setAgePreference = (req,res,next)=>{
             res.status(201).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Set gender preference
@@ -78,7 +78,7 @@ module.exports.setGenderPreference = (req,res,next)=>{
             res.status(201).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Add interests
@@ -91,7 +91,7 @@ module.exports.addInterests = (req,res,next)=>{
             res.status(responseData.statusCode).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Remove an interest
@@ -104,5 +104,5 @@ module.exports.removeInterest = (req,res,next)=>{
             res.status(responseData.statusCode).json(responseData);
             next();
         })
-    )();
+    );
 };

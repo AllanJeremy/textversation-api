@@ -13,7 +13,7 @@ module.exports.findMatches = (req,res,next)=>{
             res.status(responseData.statusCode).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 //? Getting of users that have matched with a certain user will be done on the frontend

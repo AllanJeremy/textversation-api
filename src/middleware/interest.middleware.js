@@ -21,7 +21,7 @@ module.exports.getAllInterests = (req,res,next)=>{
             res.status(responseData.statusCode).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Insert interests
@@ -33,5 +33,5 @@ module.exports.addInterests = (req,res,next)=>{
             res.status(responseData.statusCode).json(responseData);
             next();
         })
-    )();
+    );
 };

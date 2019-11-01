@@ -27,7 +27,7 @@ module.exports.login = (req,res,next)=>{
             res.status(200).json(responseData);
             next();
         })
-    )();
+    );
 };
 
 // Logout functionality
@@ -39,5 +39,5 @@ module.exports.logout = (req,res,next)=>{
             res.status(200).json(responseData);
             next();
         })
-    )();
+    );
 };
