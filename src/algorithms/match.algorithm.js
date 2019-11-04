@@ -16,6 +16,7 @@ module.exports.ajInterestMatchCalc = (user1Interests, user2Interests) => { //? C
     // Get which interests the user matched on ~ doesn't matter which user we use to compare, results are same. Using user1 as base comparison
     let matchedInterestIds = interestIds1.filter(interest1Id => interestIds2.includes(interest1Id));
     let matchedInterests = matchedInterestIds.map((currInterestId) => user1Interests[currInterestId]);
+    matchedInterests = matchedInterests.filter(interest=>interest); //? Remove falsy values from array
 
     let matchScore = matchedInterests.reduce((prev, currInterest) => { //? CurrInterest will contain weight information later on
         //? Use the different interest weights for various interests when we start using different weights
