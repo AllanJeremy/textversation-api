@@ -116,7 +116,20 @@ class MatchModel {
 
     // Save match details to db - logging
     async saveMatchDataToDb(matchData) {
+        let batch = db.batch();
 
+        matchData.map((match)=>{
+            let matchLogData = {
+                ...match,
+                dateAdded: FieldValue.serverTimestamp()
+            };
+
+            let matchLogRef = this.matchLogRef.doc();
+            
+            batch.set(matchLogRef, matchLogData);
+        });
+
+        return batch.commit();
     }
 
     // Get all users that previously matched with the user with the id of `userId`

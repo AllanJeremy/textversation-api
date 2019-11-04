@@ -75,7 +75,10 @@ class Match{
     _getInterestMatchData(user1,user2)
     {
         let interestMatchData = MatchAlgo.ajInterestMatchCalc(user1.interests,user2.interests);
-        return interestMatchData;
+        return {
+            ...interestMatchData,
+            algorithm: "AJ's Algorithm"
+        };
     }
 
     //* HELPERS
@@ -132,8 +135,9 @@ class Match{
             };
             return prospectData;
         });
-        //TODO: Log the computed prospects
 
+        // Log the computed prospects
+        MatchModel.saveMatchDataToDb(computedProspects);
 
         //* MATCHED USERS
         // Prospects that were actually a match
