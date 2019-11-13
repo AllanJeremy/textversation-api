@@ -5,6 +5,7 @@ const app = express();
 
 // Routes
 const AuthRoutes = require("./routes/auth.route");
+const ChatRoutes = require("./routes/chat.route");
 const UserRoutes = require("./routes/user.route");
 const InterestRoutes = require("./routes/interest.route");
 const MatchRoutes = require("./routes/match.route");
@@ -37,6 +38,7 @@ app.use("/auth", AuthRoutes);
 app.use("/user", UserRoutes);
 app.use("/interests", InterestRoutes);
 app.use("/match", MatchRoutes);
+app.use("/chat", ChatRoutes);
 
 
 // Error handling
