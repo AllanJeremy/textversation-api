@@ -12,7 +12,12 @@ class ChatModel {
     // Filters out unnecessary parts of the user data
     _getChatData(match) {
         let chatData = {
-            participants: [match.initiatorUser.id,match.prospectUser.id],
+            participantIds: [match.initiatorUser.id,match.prospectUser.id],
+            userData: {
+                initiator: match.initiatorUser,
+                prospect: match.prospectUser
+            },
+            interestsMatched: match.interestsMatched,
             messages: [],
             dateStarted: FieldValue.serverTimestamp()
         };
