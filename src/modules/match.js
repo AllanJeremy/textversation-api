@@ -1,7 +1,7 @@
-const {firestore} = require("../database");
-
 const DataConfig = require("../config/data.config");
 const MatchConfig = require("../config/match.config");
+
+const Chat = require("./chat");
 const User = require("./user");
 const MatchModel = require("../models/match.model");
 const MatchAlgo = require("../algorithms/match.algorithm");
@@ -16,13 +16,13 @@ class Match{
         if(!currentUser){ //? {} Used for clarity's sake when reading the code
             return false;
         }
-
         // Add the current user's id to the user returned
         currentUser.id = userId;
 
         // Remove other user fluff irrelevant to the users of this function
         delete currentUser.lastLogin;
         delete currentUser.loggedIn;
+        delete currentUser.token;
 
         return currentUser;
     }
@@ -147,7 +147,10 @@ class Match{
         
         // Top `MAX_MATCHES` matches returned only ~ Add to previously matched users
         let finalMatchedProspects = this._limitMatchedUsers(matchedProspects);
-       
+        
+        // Start new chats for all the matches
+        Chat.newChats(finalMatchedProspects);
+
         // Add match : also adds to previously matched users
         MatchModel.addMatch(finalMatchedProspects); //? Working
 
