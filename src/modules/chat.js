@@ -9,7 +9,7 @@ class Chat {
             from: messageData.from,
             to: messageData.to,
             text: messageData.text,
-            media: messageData.media,
+            media: messageData.media || null,
         };
 
         return cleansedData;
