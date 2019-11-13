@@ -47,4 +47,4 @@ class ChatModel {
     }
 }
 
-module.exports = ChatModel();
+module.exports = new ChatModel();
