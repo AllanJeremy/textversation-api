@@ -8,6 +8,9 @@ const UserMiddleware = require("../middleware/user.middleware");
 router.post('/',UserMiddleware.updateUser);
 
 //* User attributes
+// Set gender
+router.post('/gender',UserMiddleware.setGender);
+
 // Set age
 router.post('/age',UserMiddleware.setAge);
 
