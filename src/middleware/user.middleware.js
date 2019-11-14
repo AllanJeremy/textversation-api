@@ -1,18 +1,23 @@
 const User = require("../modules/user");
 const Api = require("../lib/api");
 
+// Simply refactoring to keep code DRY
+function _setUpdateResponse(res,next,updatedItemName){
+    let statusCode = 201;
+    let responseData = Api.getResponse(true,`Successfully updated ${updatedItemName}`,{
+        newValue: req.body.newValue 
+    },statusCode);
+
+    res.status(201).json(responseData);
+    next();
+}
+
 // Update user
 module.exports.updateUser = (req,res,next)=>{
     Api.attachErrorHandler(res,
         User.updateUser(req.body.uid,req.body.data)
         .then((response)=>{
-            //TODO: Add implementation
-            let responseData = {
-
-            };
-
-            res.status(201).json(responseData);
-            next();
+            _setUpdateResponse(res,next,'user');
         })
     );
 };
@@ -22,13 +27,7 @@ module.exports.setAge = (req,res,next)=>{
     Api.attachErrorHandler(res,
         User.setAge(req.body.uid,req.body.newValue)
         .then((response)=>{
-            //TODO: Add implementation
-            let responseData = {
-
-            };
-
-            res.status(201).json(responseData);
-            next();
+            _setUpdateResponse(res,next,'age');
         })
     );
 };
@@ -38,13 +37,7 @@ module.exports.setGender = (req,res,next)=>{
     Api.attachErrorHandler(res,
         User.setGender(req.body.uid,req.body.newValue)
         .then((response)=>{
-            //TODO: Add implementation
-            let responseData = {
-
-            };
-
-            res.status(201).json(responseData);
-            next();
+            _setUpdateResponse(res,next,'gender');
         }),
     );
 };
@@ -54,13 +47,7 @@ module.exports.setAgePreference = (req,res,next)=>{
     Api.attachErrorHandler(res,
         User.setAgePreference(req.body.uid,req.body.newValue)
         .then((response)=>{
-            //TODO: Add implementation
-            let responseData = {
-
-            };
-
-            res.status(201).json(responseData);
-            next();
+            _setUpdateResponse(res,next,'age preference');
         })
     );
 };
@@ -70,13 +57,7 @@ module.exports.setGenderPreference = (req,res,next)=>{
     Api.attachErrorHandler(res,
         User.setGenderPreference(req.body.uid,req.body.newValue)
         .then((response)=>{
-            //TODO: Add implementation
-            let responseData = {
-
-            };
-
-            res.status(201).json(responseData);
-            next();
+            _setUpdateResponse(res,next,'gender preference');
         })
     );
 };
