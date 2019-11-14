@@ -1,5 +1,5 @@
 const Api = require("../lib/api");
-const Chat = require("../modules/Chat");
+const Chat = require("../modules/chat");
 
 module.exports.sendMessage = (req,res,next)=>{
     Api.attachErrorHandler(res,
