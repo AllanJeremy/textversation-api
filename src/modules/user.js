@@ -26,6 +26,11 @@ class User{
         // If there is no user data, don't bother
         if(!userId || !updateData) return false;
 
+        // Generate a new nickname if we are updating the gender
+        if(updateData.gender){
+            updateData.nickname = this.getUserNickname(updateData.gender);
+        }
+
         return UserModel.updateUser(userId,updateData);
     }
 
@@ -42,6 +47,8 @@ class User{
         let updateData = {
             gender: newGender
         };
+
+        updateData.nickname = this.getUserNickname(newGender);
 
         return this.updateUser(userId,updateData);
     }
