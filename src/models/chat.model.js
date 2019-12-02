@@ -16,6 +16,7 @@ class ChatModel {
         prospect: match.prospectUser
       },
       interestsMatched: match.interestsMatched,
+      isActive: true,
       dateStarted: FieldValue.serverTimestamp()
     };
 
@@ -27,6 +28,7 @@ class ChatModel {
       userIds: [messageData.from.id, messageData.to.id], //! Possible vulnerability - if user passes random ids, we may not be able to prevent them from sending a message to other users
       ...messageData,
       threadId: chatThreadId,
+      isActive: true,
       dateSent: FieldValue.serverTimestamp()
     };
 
