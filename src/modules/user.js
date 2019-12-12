@@ -10,7 +10,7 @@ class User {
     });
 
     if (nickname.length > maxLength) {
-      _getUserNickname(gender, maxLength);
+      this.getUserNickname(gender, maxLength);
     } else {
       return nickname;
     }
