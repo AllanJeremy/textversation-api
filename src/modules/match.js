@@ -152,7 +152,7 @@ class Match {
     // If the current user was not found ~ don't bother trying to find matches
     if (!currentUser) return [];
     // If the user is still in a waiting state to match ~ can't match
-    else if (!this._canMatch(currentUser)) return [];
+    else if (!this._canMatch(currentUser)) return false;
 
     const prospects = await this._getProspects(currentUser);
     //* PROSPECTS WITH INTEREST MATCHING SCORE CALCULATED
