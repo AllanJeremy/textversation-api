@@ -82,9 +82,14 @@ class Match {
 
   // Interests match ~ returns a number between 0 and 1 representing how similar they are
   _getInterestMatchData(user1, user2) {
+    const user1Interests = user1.interests;
+    const user2Interests = user2.interests;
+
+    if (!user1Interests || !user2Interests) return false;
+
     let interestMatchData = MatchAlgo.ajInterestMatchCalc(
-      user1.interests,
-      user2.interests
+      user1Interests,
+      user2Interests
     );
     return {
       ...interestMatchData,
