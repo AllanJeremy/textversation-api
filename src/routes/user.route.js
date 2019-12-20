@@ -5,28 +5,30 @@ const UserMiddleware = require("../middleware/user.middleware");
 
 //* User
 // Update user
-router.post('/',UserMiddleware.updateUser);
+router.post("/", UserMiddleware.updateUser);
+
+// Update user token
+router.patch("/token/:userId", UserMidddleware.updateUserToken);
 
 //* User attributes
 // Set gender
-router.post('/gender',UserMiddleware.setGender);
+router.post("/gender", UserMiddleware.setGender);
 
 // Set age
-router.post('/age',UserMiddleware.setAge);
+router.post("/age", UserMiddleware.setAge);
 
 //* Preferences
 // Set age preference ~ includes age range
-router.post('/preferences/age',UserMiddleware.setAgePreference);
+router.post("/preferences/age", UserMiddleware.setAgePreference);
 
 // Set gender preference
-router.post('/preferences/gender',UserMiddleware.setGenderPreference);
+router.post("/preferences/gender", UserMiddleware.setGenderPreference);
 
 //* Interests
 // Add user interests
-router.post('/interests',UserMiddleware.addInterests);
+router.post("/interests", UserMiddleware.addInterests);
 
 // Delete an interest
-router.delete('/interests/:interestId', UserMiddleware.removeInterest);
-
+router.delete("/interests/:interestId", UserMiddleware.removeInterest);
 
 module.exports = router;

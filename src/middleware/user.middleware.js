@@ -27,6 +27,16 @@ module.exports.updateUser = (req, res, next) => {
   );
 };
 
+// Update user token
+module.exports.updateUserToken = (req, res, next) => {
+  Api.attachErrorHandler(
+    res,
+    User.updateUser(req.params.userId, req.body.data).then(response => {
+      _setUpdateResponse(req, res, next, "user token");
+    })
+  );
+};
+
 // Set age
 module.exports.setAge = (req, res, next) => {
   Api.attachErrorHandler(
