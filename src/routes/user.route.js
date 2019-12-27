@@ -8,7 +8,7 @@ const UserMiddleware = require("../middleware/user.middleware");
 router.post("/", UserMiddleware.updateUser);
 
 // Update user token
-router.patch("/token/:userId", UserMidddleware.updateUserToken);
+router.patch("/token/:userId", UserMiddleware.updateUserToken);
 
 //* User attributes
 // Set gender
