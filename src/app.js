@@ -6,11 +6,7 @@ const app = express();
 const CloudFunctionsConfig = require("./config/cloudFunctions");
 
 // Routes
-const AuthRoutes = require("./routes/auth.route");
-const ChatRoutes = require("./routes/chat.route");
-const UserRoutes = require("./routes/user.route");
-const InterestRoutes = require("./routes/interest.route");
-const MatchRoutes = require("./routes/match.route");
+const routes = require("./routes");
 
 // Cloud function routes - only accessible via secret paths through cloud functions (secret only known to backend and cf)
 const CfUserRoutes = require("./routes/cfUser.route.js");
@@ -43,12 +39,8 @@ app.use((req, res, next) => {
   next();
 });
 
-//* Official route setup
-app.use("/auth", AuthRoutes);
-app.use("/user", UserRoutes);
-app.use("/interests", InterestRoutes);
-app.use("/match", MatchRoutes);
-app.use("/chat", ChatRoutes);
+// Setup routes
+app.use(routes);
 
 //* Cloud function route setup
 app.use(
